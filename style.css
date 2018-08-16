@@ -1,7 +1,151 @@
 body {
-	width: 100vw;
 	height: 100vh;
-	background: #00c9ff;
-	background: -webkit-linear-gradient(to right, #92fe9d, #00c9ff);
 	background: linear-gradient(to right, #92fe9d, #00c9ff);
+
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+.main {
+	margin: 0 auto;
+	max-width: 400px;
+}
+
+.container {
+	padding: 20px 0;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 3px 3px 10px 0 rgba(61, 61, 61, 0.479);
+}
+
+.container h1 {
+	text-align: center;
+}
+
+.addTask__form {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 10px;
+	background: linear-gradient(to right, #50cceb, #6dedd8);
+	margin-bottom: 40px;
+}
+
+.inputText {
+	border: none;
+	border-radius: 5px;
+	padding: 5px;
+	height: 30px;
+	width: 80%;
+	font-size: 18px;
+	margin-right: 10px;
+}
+
+.inputText:focus {
+	outline: none;
+}
+
+.btn {
+	width: 50px;
+	height: 50px;
+	border-radius: 40px;
+	color: #3eeba3;
+	font-size: 26px;
+	outline: none;
+	background-color: #2e2e2e;
+	border: none;
+	transition: all 0.2s;
+}
+
+.btn:hover {
+	background-color: #3eeba3;
+	color: #2e2e2e;
+	transform: translateY(-3px);
+	box-shadow: 2.5px 2.5px 3px rgba(75, 75, 75, 0.644);
+	cursor: pointer;
+}
+
+.btn:active {
+	transform: translateY(-1px);
+	box-shadow: 1px 1px 2px rgba(75, 75, 75, 0.644);
+	background-color: #3bda98;
+}
+
+.list,
+.completed {
+	list-style: none;
+	padding: 0;
+}
+
+.list li,
+.completed li {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 15px;
+	margin: 10px 0;
+	background-color: #eee;
+	font-size: 16px;
+}
+
+.list__text {
+	width: 75%;
+}
+
+.list__icons {
+	display: flex;
+	margin: 10px;
+	font-size: 22px;
+}
+
+.list__icons--remove {
+	padding-right: 10px;
+	border-right: 1px solid rgba(192, 192, 192, 0.527);
+	transition: all 0.2s;
+	cursor: pointer;
+}
+
+.list__icons--remove:hover {
+	color: rgba(219, 16, 16, 0.753);
+}
+
+.list__icons--done {
+	margin-left: 10px;
+	transition: all 0.2s;
+	cursor: pointer;
+}
+
+.list__icons--done:hover {
+	color: #3eeba3;
+}
+
+.completed {
+	margin-top: 40px;
+	border-top: 1px solid rgb(218, 218, 218);
+}
+
+.completedItem {
+	background-color: #3eeba39a !important;
+}
+
+.disabled {
+	margin-left: 10px;
+	cursor: not-allowed;
+	color: rgb(158, 158, 158);
+}
+
+.added {
+	animation: slide-up 0.4s ease;
+	backface-visibility: hidden;
+	animation-fill-mode: backwards;
+}
+
+@keyframes slide-up {
+	0% {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
