@@ -1,10 +1,12 @@
 const btn = document.querySelector('.btn');
 const ul = document.querySelector('.list');
 const completed = document.querySelector('.completed');
+const form = document.querySelector('.form');
+const h1Show = document.querySelector('.showHideBtn');
 
 const init = () => {
     addDoneEvents();
-}
+};
 
 // when click complete button, elem move to completed list
 const addDoneEvents = () => {
@@ -21,13 +23,20 @@ const addDoneEvents = () => {
             }      
         }, false)
     }
-}
+};
 
 // when click ADD button elem goes to 'To Do list'
 btn.addEventListener('click', (e) => {
+    form.style.display = 'none';
     e.preventDefault();
     addItem();
 },false);
+
+//hide show click ->> H1 ->> form
+h1Show.addEventListener('click', (e) => {
+    e.preventDefault();
+    (form.style.display !== 'none') ? form.style.display = 'none' : form.style.display = 'block';
+});
 
 const addItem = () => {
     const inputText = document.querySelector('.inputText').value;
