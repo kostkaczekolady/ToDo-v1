@@ -1,0 +1,7 @@
+body {
+	width: 100vw;
+	height: 100vh;
+	background: #00c9ff;
+	background: -webkit-linear-gradient(to right, #92fe9d, #00c9ff);
+	background: linear-gradient(to right, #92fe9d, #00c9ff);
+}
