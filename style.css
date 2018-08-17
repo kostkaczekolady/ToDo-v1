@@ -90,7 +90,7 @@ body {
 	list-style: none;
 	padding: 0;
 	max-height: 300px;
-	overflow: scroll;
+	overflow-x: auto;
 }
 
 .list li,
