@@ -143,7 +143,7 @@ const addItem = () => {
 // date validation
 dataPicker.addEventListener('keydown', (e)=>{
     e.preventDefault();
-    event.target.value = 'nie ma pisania';
+    event.target.value = '';
 },false)
 
 init();
