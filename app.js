@@ -81,11 +81,19 @@ const removeItems = () => {
 //edit item
 const editItems = () => {
     const added = event.target.parentElement.parentElement.parentElement;
-    const toEdit = $(added.querySelector('.list__text p'));
+    const toEdit = added.querySelector('.list__text p');
     if(toEdit){
-        toEdit.attr('contenteditable','true');
-        toEdit.text('');
+        toEdit.contentEditable = true;
+        toEdit.focus();
     }
+}
+
+//priority item
+const priorityItems = () => {
+    const priority = event.target.parentElement.parentElement.parentElement;
+    const toPriority = priority.querySelector('.list__text p');
+    toPriority.classList.add('priority');
+    
 }
 
 //validation 
@@ -162,6 +170,9 @@ const addTaskNew = (getText, getDate, getDone) => {
     const icons = document.createElement('div');
     icons.classList.add('list__icons');
 
+    const priority = $('<div class="list__icons--priority"><i class="fas fa-exclamation"></i></div>');
+    $(icons).append(priority);
+
     const editIcon = $('<div class="list__icons--edit"><i class="fas fa-pen"></i></div>');
     $(icons).append(editIcon);
 
@@ -189,6 +200,11 @@ const addTaskNew = (getText, getDate, getDone) => {
     const edit = document.querySelector('.fa-pen');
     edit.addEventListener('click', editItems);
 
+    //add priority
+    const priori = document.querySelector('.fa-exclamation');
+    priori.addEventListener('click', priorityItems);
+
+
     isEmpty();
 }
 
@@ -197,6 +213,17 @@ dataPicker.addEventListener('keydown', (e)=>{
     e.preventDefault();
     event.target.value = '';
 },false)
+
+
+// change background
+     $('body').click(function(){
+         $('body').css("background", '# '+ bgColor());
+     });
+     function bgColor(){
+         return Math.floor(Math.random()*16777216).toString(16);
+     }
+
+init();
 
 
 
@@ -228,4 +255,3 @@ const writeTask = () => {
 };
 
 writeTask();
-

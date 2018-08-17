@@ -230,7 +230,7 @@ body {
 }
 
 .list__icons--edit {
-	padding-right: 10px;
+	padding: 0 10px;
 	border-right: 1px solid rgba(192, 192, 192, 0.527);
 	transition: all 0.2s;
 	cursor: pointer;
@@ -238,6 +238,17 @@ body {
 
 .list__icons--edit:hover {
 	color: rgb(211, 208, 28);
+}
+
+.list__icons--priority {
+    padding-right: 10px;
+    border-right: 1px solid rgba(192, 192, 192, 0.527);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.list__icons--priority:hover {
+    color: rgb(211, 44, 48);
 }
 
 .list__icons--remove {
@@ -310,6 +321,9 @@ ul > p {
 
 .remove {
 	animation: slide-left 0.7s ease;
+}
+.priority{
+    color: red;
 }
 
 @keyframes slide-up {
