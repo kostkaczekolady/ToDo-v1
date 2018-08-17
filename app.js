@@ -6,6 +6,14 @@ const removeBtn = document.querySelector('.list__icons--remove');
 const inputText = $('#inputText');
 const inputData = $('#inputData');
 
+let tasks;
+if (JSON.parse(localStorage.getItem('todo_list')) == null){
+    tasks = [];
+} else {
+    tasks = JSON.parse(localStorage.getItem('todo_list'));
+};
+
+
 // initialization the app on load
 const init = () => {
     $('#my-element').data('datepicker');
@@ -18,6 +26,8 @@ const addDoneItems = () => {
         if (completedElement.parentElement.classList.value==='list') { 
             completedElement.classList.remove('added');
             completedElement.classList.add('completedItem');
+            completedElement.dataset.done = 'true';
+            console.log(completedElement);
             completedElement.children[1].children[2].classList.add('disabled');
             completedElement.children[1].children[2].classList.remove('list__icons--done');
             completed.appendChild(completedElement);
@@ -64,6 +74,9 @@ const removeItems = () => {
             toRemove.parentElement.removeChild(toRemove);
             isEmpty();
         }, 500);
+    console.log(toRemove);
+    localStorage.removeItem('todo_list');
+  //  e.target.parentNode.remove();
 }
 //edit item
 const editItems = () => {
@@ -108,8 +121,33 @@ const addItem = () => {
     const inputText = document.querySelector('.inputText').value;
     const inputDate = dataPicker.value;
 
+
+    addTaskNew(inputText, inputDate, false);
+
+    addTask(inputText, inputDate, false);
+    isEmpty();
+};
+
+// date validation
+dataPicker.addEventListener('keydown', (e)=>{
+    e.preventDefault();
+    event.target.value = 'nie ma pisania';
+},false)
+
+init();
+
+
+const addTaskNew = (getText, getDate, getDone) => {
+    const inputText = getText;
+    const inputDate = getDate;
+
     const li = document.createElement('li');
     li.classList.add('added');
+
+    if (li.dataset.done !== true) {
+        li.dataset.done = getDone;
+    }
+
 
     const text = document.createElement('div');
     text.classList.add('list__text');
@@ -129,14 +167,14 @@ const addItem = () => {
 
     const removeIcon = $('<div class="list__icons--remove"><i class="fas fa-trash-alt"></i></div>');
     $(icons).append(removeIcon);
-    
+
     const doneIcon = $('<div class="list__icons--done"><i class="fas fa-check"></i></div>');
     $(icons).append(doneIcon);
 
 
     li.appendChild(text);
     li.appendChild(icons);
-    
+
     ul.prepend(li);
 
     //add complete listener to new elem
@@ -160,4 +198,34 @@ dataPicker.addEventListener('keydown', (e)=>{
     event.target.value = '';
 },false)
 
-init();
+
+
+const addTask = (text, date, done) =>{
+   // const getItems = localStorage.getItem('todo_list');
+  //  console.log(getItems);
+    tasks.push(
+        {
+            title: text,
+            date: date,
+            done: done
+        }
+    );
+    localStorage.setItem('todo_list', JSON.stringify( tasks ) );
+};
+
+
+// const items = {...localStorage}; do testow
+
+const writeTask = () => {
+    const getItems = JSON.parse(localStorage.getItem('todo_list'));
+    //   console.log(getItems);
+
+    getItems.forEach((element, index) => {
+      // $('').text(element[index].title);
+        addTaskNew(element.title, element.date);
+
+    });
+};
+
+writeTask();
+
