@@ -70,14 +70,46 @@ body {
 }
 
 .inputText {
-	width: 80%;
-
+	width: 70%;
 	border: none;
-	border-radius: 5px;
+	border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 	padding: 5px;
 	height: 30px;
 	font-size: 18px;
-	margin-right: 10px;
+}
+.val::placeholder{
+  padding-left: 7px;
+  font-size: 18px;
+  color: rgba(219, 16, 16, 0.753);
+}
+.date::placeholder{
+  padding-left: 7px;
+  font-size: 12px;
+  color: rgba(219, 16, 16, 0.753);
+}
+.ok{
+  width: 50px;
+  height: 40px;
+  box-sizing: border-box;
+  font-size: 18px;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 5px;
+  background-color: white;
+  margin-right: 15px;
+}
+.ok > .fa-check{
+  z-index: 9999;
+  color: #3eeba3;
+  padding-left: 25px;
+}
+.ok > .fa-times{
+  z-index: 9999;
+  color: rgba(219, 16, 16, 0.753);
+  padding-left: 10px;
+  padding-right: 25px;
 }
 
 .inputText:focus {
@@ -210,7 +242,17 @@ ul > p {
 	cursor: not-allowed;
 	color: rgb(158, 158, 158);
 }
-
+.show{
+  animation: show-up 0.4s ease;
+}
+@keyframes show-up {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
 .added {
 	animation: slide-up 0.4s ease;
 }
