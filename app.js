@@ -37,7 +37,6 @@ const createP2 = () => {
 }
 
 // if list is empty
-
 const isEmpty = () => {
     const listPara = document.querySelector('.list-init-text');
     const completePara = document.querySelector('.completed-init-text');

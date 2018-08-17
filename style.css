@@ -200,8 +200,7 @@ ul > p {
 	margin: 40px 0;
 }
 
-/* calsses add by JS */
-
+/* add calsses in JS */
 .completedItem {
 	background-color: #3eeba39f !important;
 }
