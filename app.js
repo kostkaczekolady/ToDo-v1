@@ -65,6 +65,16 @@ const removeItems = () => {
             isEmpty();
         }, 500);
 }
+//edit item
+const editItems = () => {
+    const added = event.target.parentElement.parentElement.parentElement;
+    const toEdit = $(added.querySelector('.list__text p'));
+    if(toEdit){
+        toEdit.attr('contenteditable','true');
+        toEdit.text('');
+    }
+}
+
 //validation 
 const checkName = () =>{
   const box = $('.ok i');
@@ -136,6 +146,10 @@ const addItem = () => {
     //add remove listener to new elem
     const remove = document.querySelector('.fa-trash-alt');
     remove.addEventListener('click', removeItems);
+
+    //add edit listener to new elem
+    const edit = document.querySelector('.fa-pen');
+    edit.addEventListener('click', editItems);
 
     isEmpty();
 }
