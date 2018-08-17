@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="./DatePicker/datepicker.css">
 
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 </head>
@@ -20,23 +21,25 @@
                 <h1 class="showHideBtn">To do List</h1>
                 <form action="" class="form">
                     <div class="addTask__form">
-                        <input type="text" class="inputText" placeholder="To Do" required>
-                        <button type="submit" class="btn" placeholed=><i class="fas fa-plus"></i></button>
+                        <div class="form-div">
+                            <input type="text" class="inputText" placeholder="To Do" required>
+                            <button type="submit" class="btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <div class="date">
+                            <p>Date:
+                                <input type='text' data-timepicker="true" class='datepicker-here' data-language='en' required/>
+                            </p>
+                        </div>
                     </div>
                 </form>
 
                 <h1>To Do:</h1>
                 <ul class="list">
                     <li>
-                        <div class="list__text">some text</div>
-                        <div class="list__icons">
-                            <div class="list__icons--edit"><i class="fas fa-pen"></i></div>
-                            <div class="list__icons--remove"><i class="fas fa-trash-alt"></i></div>
-                            <div class="list__icons--done"><i class="fas fa-check"></i></div>
+                        <div class="list__text">
+                            <p>some text</p>
+                            <p>11/09/2001 10:44 am</p>
                         </div>
-                    </li>
-                    <li>
-                        <div class="list__text">some text Lore</div>
                         <div class="list__icons">
                             <div class="list__icons--edit"><i class="fas fa-pen"></i></div>
                             <div class="list__icons--remove"><i class="fas fa-trash-alt"></i></div>
@@ -51,8 +54,9 @@
         </main>
     </div>
 
-
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="./DatePicker/datepicker.min.js"></script>
+    <script src="./DatePicker/datepicker.en.js"></script>
     <script src="app.js"></script>
 </body>
 
