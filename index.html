@@ -2,54 +2,52 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>To do</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <link rel="stylesheet" href="./DatePicker/datepicker.css">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>To do</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <link rel="stylesheet" href="./DatePicker/datepicker.css">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 </head>
 
 <body>
-    <div id="particles-js">
-        <main class="main">
-            <div class="container">
-                <h1 class="showHideBtn">To do List</h1>
-                <form action="" class="form">
-                    <div class="addTask__form">
-                        <div class="form-div">
-                            <input type="text" class="inputText" placeholder="To Do" required>
-                            <button type="submit" class="btn"><i class="fas fa-plus"></i></button>
-                        </div>
-                        <div class="date">
-                            <p>Date:
-                                <input type='text' data-timepicker="true" class='datepicker-here' data-language='en' required/>
-                            </p>
-                        </div>
-                    </div>
-                </form>
-
-                <h1>To Do:</h1>
-                <ul class="list">
-                    <p class="list-init-text">List is empty</p>
-                </ul>
-                <ul class="completed">
-                    <h1>Completed:</h1>
-                    <p class="completed-init-text">Nothing complete yet</p>
-                </ul>
+  <div id="particles-js">
+    <main class="main">
+      <div class="container">
+        <h1 class="showHideBtn">To do List</h1>
+        <form action="" class="form">
+          <div class="addTask__form">
+            <div class="form-div">
+              <input type="text" class="inputText" id="inputText" name="inputText" placeholder="To Do" required>
+              <div class="ok"><i class=""></i></div>
+              <button type="submit" class="btn"><i class="fas fa-plus"></i></button>
             </div>
-        </main>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-    <script src="./DatePicker/datepicker.min.js"></script>
-    <script src="./DatePicker/datepicker.en.js"></script>
-    <script src="app.js"></script>
-
+            <div class="date">
+              <p>Date:
+                <input type='text' data-timepicker="true" class='datepicker-here' id="inputData" name="inputData" data-language='en' required>
+            </div>
+          </div>
+        </form>
+        <h1>To Do:</h1>
+        <ul class="list">
+          <p class="list-init-text">List is empty</p>
+        </ul>
+        <ul class="completed">
+          <h1>Completed:</h1>
+          <p class="completed-init-text">Nothing complete yet</p>
+        </ul>
+      </div>
+    </main>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+  <script src="./DatePicker/datepicker.min.js"></script>
+  <script src="./DatePicker/datepicker.en.js"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>

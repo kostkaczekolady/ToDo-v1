@@ -3,6 +3,8 @@ const ul = document.querySelector('.list');
 const completed = document.querySelector('.completed');
 const dataPicker = document.querySelector('.datepicker-here');
 const removeBtn = document.querySelector('.list__icons--remove');
+const inputText = $('#inputText');
+const inputData = $('#inputData');
 
 let tasks;
 if (JSON.parse(localStorage.getItem('todo_list')) == null){
@@ -76,11 +78,42 @@ const removeItems = () => {
     localStorage.removeItem('todo_list');
   //  e.target.parentNode.remove();
 }
+//edit item
+const editItems = () => {
+    const added = event.target.parentElement.parentElement.parentElement;
+    const toEdit = $(added.querySelector('.list__text p'));
+    if(toEdit){
+        toEdit.attr('contenteditable','true');
+        toEdit.text('');
+    }
+}
+
+//validation 
+const checkName = () =>{
+  const box = $('.ok i');
+  if(inputText.val() === '' || inputData.val() === ''){
+    inputText.attr('required', 'true');
+    inputData.attr('required', 'true');
+    box.addClass('fas fa-times show');
+    inputText.attr('placeholder', 'Please fill in this place');
+    inputData.attr('placeholder', 'Please select data');
+    inputText.addClass('val');
+    inputData.addClass('date');
+  }else{
+    inputText.removeClass('val');
+    inputData.removeClass('date');
+    box.removeClass('fas fa-times show');
+    addItem();
+    inputText.val('');
+    inputData.val('');
+    inputText.attr('placeholder', 'TO DO');
+  }
+}
 
 // when click ADD button elem goes to 'To Do list'
 btn.addEventListener('click', (e) => {
     e.preventDefault();
-    addItem();
+    checkName();
 },false);
 
 // add item
@@ -151,8 +184,19 @@ const addTaskNew = (getText, getDate, getDone) => {
     //add remove listener to new elem
     const remove = document.querySelector('.fa-trash-alt');
     remove.addEventListener('click', removeItems);
+
+    //add edit listener to new elem
+    const edit = document.querySelector('.fa-pen');
+    edit.addEventListener('click', editItems);
+
+    isEmpty();
 }
 
+// date validation
+dataPicker.addEventListener('keydown', (e)=>{
+    e.preventDefault();
+    event.target.value = '';
+},false)
 
 
 
