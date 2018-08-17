@@ -41,6 +41,7 @@ body {
 
 .addTask__form {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
 	padding: 7px 10px;
@@ -48,12 +49,32 @@ body {
 	margin-bottom: 40px;
 }
 
+.form-div {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.date {
+	align-self: flex-start;
+}
+
+.datepicker-here {
+	align-self: flex-start;
+	width: 150px;
+	padding: 5px;
+	border: none;
+	border-radius: 10px;
+	outline: none;
+}
+
 .inputText {
+	width: 80%;
+
 	border: none;
 	border-radius: 5px;
 	padding: 5px;
 	height: 30px;
-	width: 80%;
 	font-size: 18px;
 	margin-right: 10px;
 }
@@ -112,9 +133,19 @@ body {
 	font-size: 18px;
 }
 
+.list__text p:nth-child(2) {
+	text-align: center;
+	font-size: 18px;
+	font-weight: 300;
+	width: 180px;
+	color: #535353;
+	border-bottom: 1px solid #00c8ff69;
+}
+
 .list__icons {
 	display: flex;
 	margin: 10px;
+	font-size: 20px;
 }
 
 .fas {
