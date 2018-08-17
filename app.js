@@ -3,6 +3,8 @@ const ul = document.querySelector('.list');
 const completed = document.querySelector('.completed');
 const dataPicker = document.querySelector('.datepicker-here');
 const removeBtn = document.querySelector('.list__icons--remove');
+const inputText = $('#inputText');
+const inputData = $('#inputData');
 
 // initialization the app on load
 const init = () => {
@@ -63,11 +65,32 @@ const removeItems = () => {
             isEmpty();
         }, 500);
 }
+//validation 
+const checkName = () =>{
+  const box = $('.ok i');
+  if(inputText.val() === '' || inputData.val() === ''){
+    inputText.attr('required', 'true');
+    inputData.attr('required', 'true');
+    box.addClass('fas fa-times show');
+    inputText.attr('placeholder', 'Please fill in this place');
+    inputData.attr('placeholder', 'Please select data');
+    inputText.addClass('val');
+    inputData.addClass('date');
+  }else{
+    inputText.removeClass('val');
+    inputData.removeClass('date');
+    box.removeClass('fas fa-times show');
+    addItem();
+    inputText.val('');
+    inputData.val('');
+    inputText.attr('placeholder', 'TO DO');
+  }
+}
 
 // when click ADD button elem goes to 'To Do list'
 btn.addEventListener('click', (e) => {
     e.preventDefault();
-    addItem();
+    checkName();
 },false);
 
 // add item
