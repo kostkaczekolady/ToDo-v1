@@ -70,8 +70,10 @@ body {
 }
 
 .inputText {
-	width: 70%;
+	width: 80%;
+
 	border: none;
+<<<<<<< HEAD
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
 	padding: 5px;
@@ -110,6 +112,13 @@ body {
 	color: rgba(219, 16, 16, 0.753);
 	padding-left: 10px;
 	padding-right: 25px;
+=======
+	border-radius: 5px;
+	padding: 5px;
+	height: 30px;
+	font-size: 18px;
+	margin-right: 10px;
+>>>>>>> 251150c0d247e2b46db1949730bca21008be1d09
 }
 
 .inputText:focus {
@@ -246,6 +255,7 @@ ul > p {
 	cursor: not-allowed;
 	color: rgb(158, 158, 158);
 }
+
 .show {
 	animation: show-up 0.4s ease;
 }
@@ -257,6 +267,7 @@ ul > p {
 		opacity: 1;
 	}
 }
+
 .added {
 	animation: slide-up 0.4s ease;
 }
