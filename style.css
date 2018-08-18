@@ -20,6 +20,10 @@ body {
 	z-index: 200;
 }
 
+.datepicker-here::placeholder {
+	text-align: center;
+}
+
 .container {
 	margin: 5%;
 	padding: 20px 0;
@@ -41,24 +45,47 @@ body {
 
 .addTask__form {
 	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
+	flex-wrap: wrap;
+	/* flex-direction: column; */
+	/* justify-content: space-around; */
 	align-items: center;
 	padding: 7px 10px;
 	background: linear-gradient(to right, #50cceb, #6dedd8);
 	margin-bottom: 40px;
 }
 
+.btn {
+	width: 50px;
+	height: 50px;
+	border-radius: 40px;
+	color: #fff;
+	font-size: 26px;
+	outline: none;
+	background-color: #2e2e2e;
+	border: none;
+	transition: color 0.2s, transform 0.3s, background-color 0.3s;
+	backface-visibility: hidden;
+}
+
+.btn:hover {
+	transform: rotate(180deg);
+	cursor: pointer;
+}
+
+.btn:active {
+	color: #3eeba3;
+	background-color: #000;
+}
+
 .form-div {
-	width: 100%;
+	flex-grow: 2;
 	display: flex;
-	align-items: center;
 }
 
 .date {
+	margin-top: 10px;
 	display: flex;
 	align-self: flex-start;
-	margin-top: 10px;
 }
 
 .date p {
@@ -66,22 +93,22 @@ body {
 	align-self: center;
 	font-size: 18px;
 	font-weight: 400;
-	margin-right: 5%;
+	margin-right: 3%;
 	margin-bottom: -2px;
 }
 
 .datepicker-here {
-	align-self: flex-start;
-	width: 150px;
 	padding: 5px;
 	border: none;
 	border-radius: 10px;
 	outline: none;
 	cursor: pointer;
+
+	width: 100%;
 }
 
 .inputText {
-	width: 70%;
+	width: 80%;
 	border: none;
 
 	border-top-left-radius: 5px;
@@ -91,14 +118,13 @@ body {
 	font-size: 18px;
 }
 .val::placeholder {
-	padding-left: 7px;
 	font-size: 18px;
 	color: rgba(219, 16, 16, 0.753);
 }
-.date::placeholder {
-	padding-left: 7px;
+.date2::placeholder {
 	font-size: 12px;
 	color: rgba(219, 16, 16, 0.753);
+	text-align: center;
 }
 .ok {
 	width: 50px;
@@ -127,16 +153,6 @@ body {
 	padding: 5px;
 	height: 30px;
 	font-size: 18px;
-}
-.val::placeholder {
-	padding-left: 7px;
-	font-size: 18px;
-	color: rgba(219, 16, 16, 0.753);
-}
-.date::placeholder {
-	padding-left: 7px;
-	font-size: 12px;
-	color: rgba(219, 16, 16, 0.753);
 }
 .ok {
 	width: 50px;
@@ -169,29 +185,6 @@ body {
 
 .inputText:focus {
 	outline: none;
-}
-
-.btn {
-	width: 50px;
-	height: 50px;
-	border-radius: 40px;
-	color: #fff;
-	font-size: 26px;
-	outline: none;
-	background-color: #2e2e2e;
-	border: none;
-	transition: color 0.2s, transform 0.3s, background-color 0.3s;
-	backface-visibility: hidden;
-}
-
-.btn:hover {
-	transform: rotate(180deg);
-	cursor: pointer;
-}
-
-.btn:active {
-	color: #3eeba3;
-	background-color: #000;
 }
 
 .list,
@@ -306,7 +299,7 @@ ul li p:first-child {
 	color: #4eb5e6;
 }
 
-/* add calsses in JS */
+/* JS classes */
 .completedItem {
 	background-color: #3eeba39f !important;
 }
@@ -373,28 +366,27 @@ ul li p:first-child {
 }
 
 @media (max-width: 450px) {
-	.form-div {
-		flex-direction: column;
-	}
-
 	.ok {
 		display: none;
 	}
 
+	.form-div {
+		width: 100%;
+	}
+
 	.inputText {
 		border-radius: 5px;
-		width: 90%;
+		flex-grow: 2;
 	}
 
 	.date {
-		display: flex;
 		flex-direction: column;
 		align-self: center;
+		width: 100%;
 	}
 
 	.addTask__form {
-		justify-content: center;
-		align-items: center;
+		flex-direction: column;
 	}
 
 	ul li {
@@ -404,10 +396,7 @@ ul li p:first-child {
 	}
 
 	.list__text {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 100%;
+		text-align: center;
 	}
 
 	.list__text p:nth-child(2) {
@@ -415,20 +404,31 @@ ul li p:first-child {
 	}
 
 	.btn {
-		width: 90%;
+		width: 83%;
 		border-radius: 10px;
-		margin-top: 15px;
+		margin: 15px 0 5px 0;
 		font-size: 20px;
 		height: 30px;
 		transition: none;
+		order: 1;
+	}
+
+	.datepicker-here {
+		width: 80%;
+		align-self: center;
 	}
 
 	.date p {
 		font-size: 16px;
 		margin-bottom: 5px;
+		margin-right: 0;
 	}
 
 	#inputData {
 		margin-top: 0;
+	}
+
+	.inputText::placeholder {
+		text-align: center;
 	}
 }
