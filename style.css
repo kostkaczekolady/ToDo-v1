@@ -204,7 +204,7 @@ body {
 }
 
 .list__text {
-	width: 75%;
+	width: 55%;
 	letter-spacing: 0.5px;
 	font-weight: 400;
 	font-size: 18px;
@@ -241,14 +241,14 @@ body {
 }
 
 .list__icons--priority {
-    padding-right: 10px;
-    border-right: 1px solid rgba(192, 192, 192, 0.527);
-    transition: all 0.2s;
-    cursor: pointer;
+	padding-right: 10px;
+	border-right: 1px solid rgba(192, 192, 192, 0.527);
+	transition: all 0.2s;
+	cursor: pointer;
 }
 
 .list__icons--priority:hover {
-    color: rgb(211, 44, 48);
+	color: rgb(211, 44, 48);
 }
 
 .list__icons--remove {
@@ -276,6 +276,10 @@ ul > p {
 	text-align: center;
 	font-weight: 300;
 	color: rgb(145, 145, 145);
+}
+
+ul li p:first-child {
+	border-bottom: 2px solid transparent;
 }
 
 .completed {
@@ -322,8 +326,17 @@ ul > p {
 .remove {
 	animation: slide-left 0.7s ease;
 }
-.priority{
-    color: red;
+.priority {
+	color: red;
+}
+
+.edit {
+	color: rgb(198, 201, 15);
+}
+
+.editable {
+	border-bottom: 2px solid #3eeba38c !important;
+	outline: none;
 }
 
 @keyframes slide-up {

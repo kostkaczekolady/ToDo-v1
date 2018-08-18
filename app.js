@@ -17,6 +17,219 @@ if (JSON.parse(localStorage.getItem('todo_list')) == null) {
 // initialization the app on load
 const init = () => {
     $('#my-element').data('datepicker');
+    particle();
+    var count_particles;
+};
+
+// when click complete button, elem move to completed list
+const addDoneItems = () => {
+    const completedElement = event.target.parentElement.parentElement.parentElement;
+    if (completedElement.parentElement.classList.value === 'list') {
+        completedElement.classList.remove('added');
+        completedElement.classList.add('completedItem');
+        completedElement.dataset.done = 'true';
+        completedElement.children[1].children[3].classList.add('disabled');
+        completedElement.children[1].children[3].classList.remove('list__icons--done');
+        completed.appendChild(completedElement);
+    }
+    isEmpty();
+};
+
+const createP = () => {
+    const para = document.createElement('p');
+    para.classList.add('list-init-text');
+    para.innerText = 'List is empty';
+    return para
+};
+const createP2 = () => {
+    const para = document.createElement('p');
+    para.classList.add('completed-init-text');
+    para.innerText = 'Nothing complete yet';
+    return para
+};
+
+// if list is empty
+const isEmpty = () => {
+    const listPara = document.querySelector('.list-init-text');
+    const completePara = document.querySelector('.completed-init-text');
+
+    if (ul.children.length > 1 && ul.children[1].innerHTML === 'List is empty') {
+        listPara.parentElement.removeChild(listPara);
+    } else if (ul.children.length < 1) {
+        ul.appendChild(createP())
+    }
+
+    if (completed.children.length > 2 && completed.children[1].innerHTML === 'Nothing complete yet') {
+        completePara.parentElement.removeChild(completePara);
+    } else if (completed.children.length < 2) {
+        completed.appendChild(createP2())
+    }
+};
+
+// remove item
+const removeItems = () => {
+    const toRemove = event.target.parentElement.parentElement.parentElement;
+    toRemove.classList.add('remove');
+    setTimeout(() => {
+        toRemove.parentElement.removeChild(toRemove);
+        isEmpty();
+    }, 500);
+    //removing a elements from localStorage
+    localStorage.removeItem('todo_list');
+};
+
+//edit item
+const editItems = () => {
+    const added = event.target.parentElement.parentElement.parentElement;
+    const icon = event.target;
+    const toEdit = added.querySelector('.list__text p');
+    icon.classList.toggle('edit');
+    toEdit.classList.toggle('editable');
+    toEdit.contentEditable === 'false' ? toEdit.contentEditable = true : toEdit.contentEditable = false;
+};
+
+//priority item
+const priorityItems = () => {
+    const priority = event.target.parentElement.parentElement.parentElement;
+    const icon = event.target;
+    const toPriority = priority.querySelector('.list__text p');
+    icon.classList.toggle('priority');
+    toPriority.classList.toggle('priority');
+};
+
+//validation 
+const checkName = () => {
+    const box = $('.ok i');
+    if (inputText.val() === '' || inputData.val() === '') {
+        inputText.attr('required', 'true');
+        inputData.attr('required', 'true');
+        box.addClass('fas fa-times show');
+        inputText.attr('placeholder', 'Please fill in this place');
+        inputData.attr('placeholder', 'Please select data');
+        inputText.addClass('val');
+        inputData.addClass('date');
+    } else {
+        inputText.removeClass('val');
+        inputData.removeClass('date');
+        box.removeClass('fas fa-times show');
+        addItem();
+        inputText.val('');
+        inputData.val('');
+        inputText.attr('placeholder', 'TO DO');
+    }
+};
+
+// date validation
+dataPicker.addEventListener('keydown', (e) => {
+    e.preventDefault();
+    event.target.value = '';
+}, false);
+
+// when click ADD button elem goes to 'To Do list'
+btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    checkName();
+}, false);
+
+// add item
+const addItem = () => {
+    const inputText = document.querySelector('.inputText').value;
+    const inputDate = dataPicker.value;
+
+    addTaskNew(inputText, inputDate, false);
+
+    addTask(inputText, inputDate, false);
+    isEmpty();
+};
+
+//Function addTask - for adding task to DOM ELEMENTS and for LOCAL STORAGE
+const addTaskNew = (getText, getDate, getDone) => {
+    const inputText = getText;
+    const inputDate = getDate;
+
+    const li = document.createElement('li');
+    li.classList.add('added');
+
+    if (li.dataset.done !== true) {
+        li.dataset.done = getDone;
+    }
+
+    const text = document.createElement('div');
+    text.classList.add('list__text');
+    const textP = document.createElement('p');
+    textP.innerText = inputText;
+    textP.contentEditable=false;
+    text.appendChild(textP);
+
+    const dateP = document.createElement('p');
+    dateP.innerText = inputDate;
+    text.appendChild(dateP);
+
+    const icons = document.createElement('div');
+    icons.classList.add('list__icons');
+
+    const priority = $('<div class="list__icons--priority"><i class="fas fa-exclamation"></i></div>');
+    $(icons).append(priority);
+
+    const editIcon = $('<div class="list__icons--edit"><i class="fas fa-pen"></i></div>');
+    $(icons).append(editIcon);
+
+    const removeIcon = $('<div class="list__icons--remove"><i class="fas fa-trash-alt"></i></div>');
+    $(icons).append(removeIcon);
+
+    const doneIcon = $('<div class="list__icons--done"><i class="fas fa-check"></i></div>');
+    $(icons).append(doneIcon);
+
+
+    li.appendChild(text);
+    li.appendChild(icons);
+
+    ul.prepend(li);
+
+    //add complete listener to new elem
+    const complete = document.querySelector('.fa-check');
+    complete.addEventListener('click', addDoneItems);
+
+    //add remove listener to new elem
+    const remove = document.querySelector('.fa-trash-alt');
+    remove.addEventListener('click', removeItems);
+
+    //add edit listener to new elem
+    const edit = document.querySelector('.fa-pen');
+    edit.addEventListener('click', editItems);
+
+    //add priority
+    const priori = document.querySelector('.fa-exclamation');
+    priori.addEventListener('click', priorityItems);
+
+    isEmpty();
+};
+
+//adding task to local storage
+const addTask = (text, date, done) => {
+    tasks.push(
+        {
+            title: text,
+            date: date,
+            done: done
+        }
+    );
+    localStorage.setItem('todo_list', JSON.stringify(tasks));
+};
+
+// const items = {...localStorage}; do testow
+
+//writing task from local storage to HTML
+const writeTask = () => {
+    const getItems = JSON.parse(localStorage.getItem('todo_list'));
+    if (getItems !== null) {
+        getItems.forEach((element, index) => {
+        addTaskNew(element.title, element.date);
+        });
+    }
+};
+
+const particle = () => {
     particlesJS("particles-js", {
         "particles": {
             "number": {"value": 95, "density": {"enable": true, "value_area": 800}},
@@ -66,224 +279,8 @@ const init = () => {
         },
         "retina_detect": true
     });
-    var count_particles;
-};
+}
 
-// when click complete button, elem move to completed list
-const addDoneItems = () => {
-    const completedElement = event.target.parentElement.parentElement.parentElement;
-    if (completedElement.parentElement.classList.value === 'list') {
-        completedElement.classList.remove('added');
-        completedElement.classList.add('completedItem');
-        completedElement.dataset.done = 'true';
-        console.log(completedElement);
-        completedElement.children[1].children[2].classList.add('disabled');
-        completedElement.children[1].children[2].classList.remove('list__icons--done');
-        completed.appendChild(completedElement);
-    }
-    isEmpty();
-};
-
-const createP = () => {
-    const para = document.createElement('p');
-    para.classList.add('list-init-text');
-    para.innerText = 'List is empty';
-    return para
-};
-const createP2 = () => {
-    const para = document.createElement('p');
-    para.classList.add('completed-init-text');
-    para.innerText = 'Nothing complete yet';
-    return para
-};
-
-// if list is empty
-const isEmpty = () => {
-    const listPara = document.querySelector('.list-init-text');
-    const completePara = document.querySelector('.completed-init-text');
-
-    if (ul.children.length > 1 && ul.children[1].innerHTML === 'List is empty') {
-        listPara.parentElement.removeChild(listPara);
-    } else if (ul.children.length < 1) {
-        ul.appendChild(createP())
-    }
-
-    if (completed.children.length > 2 && completed.children[1].innerHTML === 'Nothing complete yet') {
-        completePara.parentElement.removeChild(completePara);
-    } else if (completed.children.length < 2) {
-        completed.appendChild(createP2())
-    }
-};
-
-// remove item
-const removeItems = () => {
-    const toRemove = event.target.parentElement.parentElement.parentElement;
-    toRemove.classList.add('remove');
-    setTimeout(() => {
-        toRemove.parentElement.removeChild(toRemove);
-        isEmpty();
-    }, 500);
-    console.log(toRemove);
-    //removing a elements from localStorage
-    localStorage.removeItem('todo_list');
-};
-
-//edit item
-const editItems = () => {
-    const added = event.target.parentElement.parentElement.parentElement;
-    const toEdit = added.querySelector('.list__text p');
-    if (toEdit) {
-        toEdit.contentEditable = true;
-        toEdit.focus();
-    }
-};
-
-//priority item
-const priorityItems = () => {
-    const priority = event.target.parentElement.parentElement.parentElement;
-    const toPriority = priority.querySelector('.list__text p');
-    toPriority.classList.add('priority');
-};
-
-//validation 
-const checkName = () => {
-    const box = $('.ok i');
-    if (inputText.val() === '' || inputData.val() === '') {
-        inputText.attr('required', 'true');
-        inputData.attr('required', 'true');
-        box.addClass('fas fa-times show');
-        inputText.attr('placeholder', 'Please fill in this place');
-        inputData.attr('placeholder', 'Please select data');
-        inputText.addClass('val');
-        inputData.addClass('date');
-    } else {
-        inputText.removeClass('val');
-        inputData.removeClass('date');
-        box.removeClass('fas fa-times show');
-        addItem();
-        inputText.val('');
-        inputData.val('');
-        inputText.attr('placeholder', 'TO DO');
-    }
-};
-
-// when click ADD button elem goes to 'To Do list'
-btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    checkName();
-}, false);
-
-// add item
-const addItem = () => {
-    const inputText = document.querySelector('.inputText').value;
-    const inputDate = dataPicker.value;
-
-
-    addTaskNew(inputText, inputDate, false);
-
-    addTask(inputText, inputDate, false);
-    isEmpty();
-};
-
-// date validation
-dataPicker.addEventListener('keydown', (e) => {
-    e.preventDefault();
-    event.target.value = 'nie ma pisania';
-}, false);
-
+// app initialization
 init();
-
-//Function addTask - for adding task to DOM ELEMENTS and for LOCAL STORAGE
-const addTaskNew = (getText, getDate, getDone) => {
-    const inputText = getText;
-    const inputDate = getDate;
-
-    const li = document.createElement('li');
-    li.classList.add('added');
-
-    if (li.dataset.done !== true) {
-        li.dataset.done = getDone;
-    }
-
-
-    const text = document.createElement('div');
-    text.classList.add('list__text');
-    const textP = document.createElement('p');
-    textP.innerText = inputText;
-    text.appendChild(textP);
-
-    const dateP = document.createElement('p');
-    dateP.innerText = inputDate;
-    text.appendChild(dateP);
-
-    const icons = document.createElement('div');
-    icons.classList.add('list__icons');
-
-    const priority = $('<div class="list__icons--priority"><i class="fas fa-exclamation"></i></div>');
-    $(icons).append(priority);
-
-    const editIcon = $('<div class="list__icons--edit"><i class="fas fa-pen"></i></div>');
-    $(icons).append(editIcon);
-
-    const removeIcon = $('<div class="list__icons--remove"><i class="fas fa-trash-alt"></i></div>');
-    $(icons).append(removeIcon);
-
-    const doneIcon = $('<div class="list__icons--done"><i class="fas fa-check"></i></div>');
-    $(icons).append(doneIcon);
-
-
-    li.appendChild(text);
-    li.appendChild(icons);
-
-    ul.prepend(li);
-
-    //add complete listener to new elem
-    const complete = document.querySelector('.fa-check');
-    complete.addEventListener('click', addDoneItems);
-
-    //add remove listener to new elem
-    const remove = document.querySelector('.fa-trash-alt');
-    remove.addEventListener('click', removeItems);
-
-    //add edit listener to new elem
-    const edit = document.querySelector('.fa-pen');
-    edit.addEventListener('click', editItems);
-
-    //add priority
-    const priori = document.querySelector('.fa-exclamation');
-    priori.addEventListener('click', priorityItems);
-
-
-    isEmpty();
-};
-
-//adding task to local storage
-const addTask = (text, date, done) => {
-    tasks.push(
-        {
-            title: text,
-            date: date,
-            done: done
-        }
-    );
-    localStorage.setItem('todo_list', JSON.stringify(tasks));
-};
-
-init();
-// const items = {...localStorage}; do testow
-
-//writing task from local storage to HTML
-const writeTask = () => {
-    const getItems = JSON.parse(localStorage.getItem('todo_list'));
-    getItems.forEach((element, index) => {
-        addTaskNew(element.title, element.date);
-    });
-};
-
-writeTask();
-
-// date validation
-dataPicker.addEventListener('keydown', (e) => {
-    e.preventDefault();
-    event.target.value = '';
-}, false);
+window.addEventListener('load', writeTask, false)
