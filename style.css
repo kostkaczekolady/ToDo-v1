@@ -56,7 +56,18 @@ body {
 }
 
 .date {
+	display: flex;
 	align-self: flex-start;
+	margin-top: 10px;
+}
+
+.date p {
+	margin: 0;
+	align-self: center;
+	font-size: 18px;
+	font-weight: 400;
+	margin-right: 5%;
+	margin-bottom: -2px;
 }
 
 .datepicker-here {
@@ -214,7 +225,7 @@ body {
 	text-align: center;
 	font-size: 18px;
 	font-weight: 300;
-	width: 180px;
+	max-width: 180px;
 	color: #535353;
 	border-bottom: 1px solid #00c8ff69;
 }
@@ -358,5 +369,66 @@ ul li p:first-child {
 	100% {
 		opacity: 0;
 		transform: translateX(-420px);
+	}
+}
+
+@media (max-width: 450px) {
+	.form-div {
+		flex-direction: column;
+	}
+
+	.ok {
+		display: none;
+	}
+
+	.inputText {
+		border-radius: 5px;
+		width: 90%;
+	}
+
+	.date {
+		display: flex;
+		flex-direction: column;
+		align-self: center;
+	}
+
+	.addTask__form {
+		justify-content: center;
+		align-items: center;
+	}
+
+	ul li {
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+
+	.list__text {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+	}
+
+	.list__text p:nth-child(2) {
+		margin-top: 0;
+	}
+
+	.btn {
+		width: 90%;
+		border-radius: 10px;
+		margin-top: 15px;
+		font-size: 20px;
+		height: 30px;
+		transition: none;
+	}
+
+	.date p {
+		font-size: 16px;
+		margin-bottom: 5px;
+	}
+
+	#inputData {
+		margin-top: 0;
 	}
 }
