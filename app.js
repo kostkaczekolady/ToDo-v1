@@ -105,17 +105,17 @@ const checkName = () => {
         inputData.attr('required', 'true');
         box.addClass('fas fa-times show');
         inputText.attr('placeholder', 'Please fill in this place');
-        inputData.attr('placeholder', 'Please select data');
+        inputData.attr('placeholder', 'Select data');
         inputText.addClass('val');
-        inputData.addClass('date');
+        inputData.addClass('date2');
     } else {
         inputText.removeClass('val');
-        inputData.removeClass('date');
+        inputData.removeClass('date2');
         box.removeClass('fas fa-times show');
         addItem();
         inputText.val('');
         inputData.val('');
-        inputText.attr('placeholder', 'TO DO');
+        inputText.attr('placeholder', 'Something to do');
     }
 };
 
