@@ -6,6 +6,11 @@ const removeBtn = document.querySelector('.list__icons--remove');
 const inputText = $('#inputText');
 const inputData = $('#inputData');
 
+//Getting ID
+const getId = () => {
+    return document.querySelectorAll('li').length + 1;
+};
+
 //For load localstorage
 let tasks;
 if (JSON.parse(localStorage.getItem('todo_list')) == null) {
@@ -31,6 +36,8 @@ const addDoneItems = () => {
         completedElement.children[1].children[3].classList.add('disabled');
         completedElement.children[1].children[3].classList.remove('list__icons--done');
         completed.appendChild(completedElement);
+
+
     }
     isEmpty();
 };
@@ -135,20 +142,25 @@ btn.addEventListener('click', (e) => {
 const addItem = () => {
     const inputText = document.querySelector('.inputText').value;
     const inputDate = dataPicker.value;
+    const id = getId();
 
-    addTaskNew(inputText, inputDate, false);
+    addTaskNew(inputText, inputDate, false, id);
 
-    addTask(inputText, inputDate, false);
+    addTask(inputText, inputDate, false, id);
     isEmpty();
 };
 
+
+
+
 //Function addTask - for adding task to DOM ELEMENTS and for LOCAL STORAGE
-const addTaskNew = (getText, getDate, getDone) => {
+const addTaskNew = (getText, getDate, getDone, getId) => {
     const inputText = getText;
     const inputDate = getDate;
 
     const li = document.createElement('li');
     li.classList.add('added');
+    li.dataset.id = getId;
 
     if (li.dataset.done !== true) {
         li.dataset.done = getDone;
@@ -206,9 +218,10 @@ const addTaskNew = (getText, getDate, getDone) => {
 };
 
 //adding task to local storage
-const addTask = (text, date, done) => {
+const addTask = (text, date, done, id) => {
     tasks.push(
         {
+            id: id,
             title: text,
             date: date,
             done: done
