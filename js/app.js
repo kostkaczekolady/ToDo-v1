@@ -6,6 +6,11 @@ const removeBtn = document.querySelector('.list__icons--remove');
 const inputText = $('#inputText');
 const inputData = $('#inputData');
 
+//Getting ID
+const getId = () => {
+    return document.querySelectorAll('li').length + 1;
+};
+
 //For load localstorage
 let tasks;
 if (JSON.parse(localStorage.getItem('todo_list')) == null) {
@@ -22,7 +27,7 @@ const init = () => {
 };
 
 // when click complete button, elem move to completed list
-const addDoneItems = () => {
+const addDoneItems = ( ) => {
     const completedElement = event.target.parentElement.parentElement.parentElement;
     if (completedElement.parentElement.classList.value === 'list') {
         completedElement.classList.remove('added');
@@ -30,7 +35,22 @@ const addDoneItems = () => {
         completedElement.dataset.done = 'true';
         completedElement.children[1].children[3].classList.add('disabled');
         completedElement.children[1].children[3].classList.remove('list__icons--done');
+        console.log(completedElement);
         completed.appendChild(completedElement);
+
+
+        const itemId = completedElement.dataset.id;
+        console.log(itemId)
+        var items = JSON.parse(localStorage["todo_list"]);
+        for (var i = 0; i < items.length; i++) {
+            if(items[i].id == itemId){
+                items[i].done = true;
+               // items[i].dataset.done = true;
+                break;
+            }
+        }
+        items = JSON.stringify(items)
+        localStorage.setItem("todo_list", items);
     }
     isEmpty();
 };
@@ -69,13 +89,24 @@ const isEmpty = () => {
 // remove item
 const removeItems = () => {
     const toRemove = event.target.parentElement.parentElement.parentElement;
+    const itemId = toRemove.dataset.id;
     toRemove.classList.add('remove');
     setTimeout(() => {
         toRemove.parentElement.removeChild(toRemove);
         isEmpty();
     }, 500);
+
     //removing a elements from localStorage
-    localStorage.removeItem('todo_list');
+    var items = JSON.parse(localStorage["todo_list"]);
+    for (var i = 0; i < items.length; i++) {
+        if(items[i].id == itemId){
+            items.splice(i, 1);
+            break;
+        }
+    }
+    items = JSON.stringify(items)
+    console.log(itemId)
+    localStorage.setItem("todo_list", items);
 };
 
 //edit item
@@ -86,6 +117,20 @@ const editItems = () => {
     icon.classList.toggle('edit');
     toEdit.classList.toggle('editable');
     toEdit.contentEditable === 'false' ? toEdit.contentEditable = true : toEdit.contentEditable = false;
+
+
+    //Adding edited content to localstorage
+    const itemId = added.dataset.id;
+    //console.log(itemId)
+    var items = JSON.parse(localStorage["todo_list"]);
+    for (var i = 0; i < items.length; i++) {
+        if(items[i].id == itemId){
+            items[i].title = toEdit.innerText
+            break;
+        }
+    }
+    items = JSON.stringify(items)
+    localStorage.setItem("todo_list", items);
 };
 
 //priority item
@@ -95,6 +140,25 @@ const priorityItems = () => {
     const toPriority = priority.querySelector('.list__text p');
     icon.classList.toggle('priority');
     toPriority.classList.toggle('priority');
+
+    //getting id
+    const itemId = priority.dataset.id;
+
+    //Local storage data
+    var items = JSON.parse(localStorage["todo_list"]);
+    for (var i = 0; i < items.length; i++) {
+        if(items[i].id == itemId){
+            if(items[i].prio !== true) {
+                items[i].prio = true;
+                break;
+            } else {
+                items[i].prio = false;
+                break;
+            }
+        }
+    }
+    items = JSON.stringify(items)
+    localStorage.setItem("todo_list", items);
 };
 
 //validation 
@@ -135,21 +199,30 @@ btn.addEventListener('click', (e) => {
 const addItem = () => {
     const inputText = document.querySelector('.inputText').value;
     const inputDate = dataPicker.value;
+    const id = getId();
 
-    addTaskNew(inputText, inputDate, false);
+    addTaskNew(inputText, inputDate, false, id, false);
 
-    addTask(inputText, inputDate, false);
+    addTask(inputText, inputDate, false, id, false);
     isEmpty();
 };
 
 //Function addTask - for adding task to DOM ELEMENTS and for LOCAL STORAGE
-const addTaskNew = (getText, getDate, getDone) => {
+const addTaskNew = (getText, getDate, getDone, getId, prio) => {
     const inputText = getText;
     const inputDate = getDate;
 
     const li = document.createElement('li');
-    li.classList.add('added');
 
+    //Local storage data
+    if (getDone === true) {
+        li.classList.add('completedItem');
+    } else {
+        li.classList.add('added');
+    }
+
+    //Local storage data
+    li.dataset.id = getId;
     if (li.dataset.done !== true) {
         li.dataset.done = getDone;
     }
@@ -184,7 +257,15 @@ const addTaskNew = (getText, getDate, getDone) => {
     li.appendChild(text);
     li.appendChild(icons);
 
-    ul.prepend(li);
+    li.dataset.prio = prio;
+
+    //getting done ==> child of completed or new tasks
+    if (getDone === true) {
+        completed.append(li);
+    } else {
+        ul.prepend(li);
+    }
+
 
     //add complete listener to new elem
     const complete = document.querySelector('.fa-check');
@@ -206,25 +287,41 @@ const addTaskNew = (getText, getDate, getDone) => {
 };
 
 //adding task to local storage
-const addTask = (text, date, done) => {
+const addTask = (text, date, done, id, prio) => {
     tasks.push(
         {
+            id: id,
             title: text,
             date: date,
-            done: done
+            done: done,
+            prio: prio,
         }
     );
     localStorage.setItem('todo_list', JSON.stringify(tasks));
 };
 
-// const items = {...localStorage}; do testow
+//przeklenstwo
+const writePriority = (element) => {
+        if (element.prio == true) {
+            const li = document.querySelectorAll('li');
+            for (let i=0; i<li.length; i++) {
+               if ( li[i].dataset.id == element.id) {
+                   const icon = li[i].querySelector(".list__icons--priority");
+                   const text = li[i].querySelector('.list__text p');
+                   icon.classList.toggle('priority');
+                   text.classList.toggle('priority');
+               }
+            }
+        }
+    }
 
 //writing task from local storage to HTML
 const writeTask = () => {
     const getItems = JSON.parse(localStorage.getItem('todo_list'));
     if (getItems !== null) {
         getItems.forEach((element, index) => {
-        addTaskNew(element.title, element.date);
+        addTaskNew(element.title, element.date, element.done, element.id, element.prio);
+        writePriority(element);
         });
     }
 };
