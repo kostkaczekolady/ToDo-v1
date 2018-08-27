@@ -141,8 +141,10 @@ const priorityItems = () => {
     icon.classList.toggle('priority');
     toPriority.classList.toggle('priority');
 
+    //getting id
     const itemId = priority.dataset.id;
-    //console.log(itemId)
+
+    //Local storage data
     var items = JSON.parse(localStorage["todo_list"]);
     for (var i = 0; i < items.length; i++) {
         if(items[i].id == itemId){
@@ -205,23 +207,21 @@ const addItem = () => {
     isEmpty();
 };
 
-
-
-
 //Function addTask - for adding task to DOM ELEMENTS and for LOCAL STORAGE
 const addTaskNew = (getText, getDate, getDone, getId, prio) => {
     const inputText = getText;
     const inputDate = getDate;
 
     const li = document.createElement('li');
+
+    //Local storage data
     if (getDone === true) {
         li.classList.add('completedItem');
     } else {
         li.classList.add('added');
     }
 
-
-
+    //Local storage data
     li.dataset.id = getId;
     if (li.dataset.done !== true) {
         li.dataset.done = getDone;
@@ -300,9 +300,6 @@ const addTask = (text, date, done, id, prio) => {
     localStorage.setItem('todo_list', JSON.stringify(tasks));
 };
 
-// const items = {...localStorage}; do testow
-
-
 //przeklenstwo
 const writePriority = (element) => {
         if (element.prio == true) {
@@ -317,7 +314,6 @@ const writePriority = (element) => {
             }
         }
     }
-
 
 //writing task from local storage to HTML
 const writeTask = () => {
