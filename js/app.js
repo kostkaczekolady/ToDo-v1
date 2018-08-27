@@ -27,7 +27,7 @@ const init = () => {
 };
 
 // when click complete button, elem move to completed list
-const addDoneItems = () => {
+const addDoneItems = ( ) => {
     const completedElement = event.target.parentElement.parentElement.parentElement;
     if (completedElement.parentElement.classList.value === 'list') {
         completedElement.classList.remove('added');
@@ -35,7 +35,9 @@ const addDoneItems = () => {
         completedElement.dataset.done = 'true';
         completedElement.children[1].children[3].classList.add('disabled');
         completedElement.children[1].children[3].classList.remove('list__icons--done');
+        console.log(completedElement);
         completed.appendChild(completedElement);
+
 
 
     }
@@ -76,13 +78,31 @@ const isEmpty = () => {
 // remove item
 const removeItems = () => {
     const toRemove = event.target.parentElement.parentElement.parentElement;
+    const itemId = toRemove.dataset.id;
     toRemove.classList.add('remove');
     setTimeout(() => {
         toRemove.parentElement.removeChild(toRemove);
         isEmpty();
     }, 500);
     //removing a elements from localStorage
-    localStorage.removeItem('todo_list');
+  /*  var items = JSON.parse(localStorage.getItem("todo_list"));
+    for (let i=0; i<items.length; i++) {
+        if (items[i].id === itemId) {
+            items.splice(itemId);
+        }
+    }
+      items = JSON.stringify("todo_list");
+    localStorage.setItem("todo_list", items);;*/
+    var items = JSON.parse(localStorage["todo_list"]);
+    for (var i = 0; i < items.length; i++) {
+        if(items[i].id == itemId){
+            items.splice(i, 1);
+            break;
+        }
+    }
+    items = JSON.stringify(items)
+    console.log(itemId)
+    localStorage.setItem("todo_list", items);
 };
 
 //edit item
@@ -237,7 +257,7 @@ const writeTask = () => {
     const getItems = JSON.parse(localStorage.getItem('todo_list'));
     if (getItems !== null) {
         getItems.forEach((element, index) => {
-        addTaskNew(element.title, element.date);
+        addTaskNew(element.title, element.date, element.done, element.id);
         });
     }
 };
