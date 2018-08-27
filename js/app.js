@@ -84,15 +84,8 @@ const removeItems = () => {
         toRemove.parentElement.removeChild(toRemove);
         isEmpty();
     }, 500);
+
     //removing a elements from localStorage
-  /*  var items = JSON.parse(localStorage.getItem("todo_list"));
-    for (let i=0; i<items.length; i++) {
-        if (items[i].id === itemId) {
-            items.splice(itemId);
-        }
-    }
-      items = JSON.stringify("todo_list");
-    localStorage.setItem("todo_list", items);;*/
     var items = JSON.parse(localStorage["todo_list"]);
     for (var i = 0; i < items.length; i++) {
         if(items[i].id == itemId){
@@ -113,6 +106,18 @@ const editItems = () => {
     icon.classList.toggle('edit');
     toEdit.classList.toggle('editable');
     toEdit.contentEditable === 'false' ? toEdit.contentEditable = true : toEdit.contentEditable = false;
+
+    const itemId = added.dataset.id;
+    console.log(itemId)
+    var items = JSON.parse(localStorage["todo_list"]);
+    for (var i = 0; i < items.length; i++) {
+        if(items[i].id == itemId){
+            items[i].title = toEdit.innerText
+            break;
+        }
+    }
+    items = JSON.stringify(items)
+    localStorage.setItem("todo_list", items);
 };
 
 //priority item
