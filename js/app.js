@@ -39,7 +39,18 @@ const addDoneItems = ( ) => {
         completed.appendChild(completedElement);
 
 
-
+        const itemId = completedElement.dataset.id;
+        console.log(itemId)
+        var items = JSON.parse(localStorage["todo_list"]);
+        for (var i = 0; i < items.length; i++) {
+            if(items[i].id == itemId){
+                items[i].done = true;
+               // items[i].dataset.done = true;
+                break;
+            }
+        }
+        items = JSON.stringify(items)
+        localStorage.setItem("todo_list", items);
     }
     isEmpty();
 };
@@ -107,8 +118,10 @@ const editItems = () => {
     toEdit.classList.toggle('editable');
     toEdit.contentEditable === 'false' ? toEdit.contentEditable = true : toEdit.contentEditable = false;
 
+
+    //Adding edited content to localstorage
     const itemId = added.dataset.id;
-    console.log(itemId)
+    //console.log(itemId)
     var items = JSON.parse(localStorage["todo_list"]);
     for (var i = 0; i < items.length; i++) {
         if(items[i].id == itemId){
@@ -184,7 +197,12 @@ const addTaskNew = (getText, getDate, getDone, getId) => {
     const inputDate = getDate;
 
     const li = document.createElement('li');
-    li.classList.add('added');
+    if (getDone === true) {
+        li.classList.add('completedItem');
+    } else {
+        li.classList.add('added');
+    }
+
     li.dataset.id = getId;
 
     if (li.dataset.done !== true) {
