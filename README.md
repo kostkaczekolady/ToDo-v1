@@ -8,7 +8,7 @@ ToDo-v1 is an app supporting tasks management. To remeber about important things
 
 ToDo-v1 web project was designed and implemented during Fronted course in CodersLab by:
 1. Dominika Dziubińska  (https://github.com/kostkaczekolady)
-2. Karol Kałtus  (https://github.com/karolkalkus)
+2. Karol Kałkus  (https://github.com/karolkalkus)
 3. Michał Ostrożny  (https://github.com/mostrozny)
 4. Mikołaj Schatt  (https://github.com/r1skz3ro)
 
