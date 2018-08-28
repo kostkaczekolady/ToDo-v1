@@ -1,4 +1,5 @@
 # ToDo-v1
+<<<<<<< HEAD
 ToDo-v1 is an app supporting tasks management. To remeber about important things you can easily create, modify and delte a task with a specific deadline. Additionally, each task might by marked as prioritized. Completed tasks are moved to `Completed` section. 
 
  
@@ -22,3 +23,6 @@ ToDo-v1 web project was designed and implemented during Fronted course in Coders
 3. Enjoy!
 
 [demo] (https://kostkaczekolady.github.io/ToDo-v1/)
+=======
+[ToDo Demo](https://kostkaczekolady.github.io/ToDo-v1/)
+>>>>>>> f2ed09c47567fe833a4efeb9ef3853824c154e05

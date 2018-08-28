@@ -12,7 +12,7 @@
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <link rel="stylesheet" href="./DatePicker/datepicker.css">
 
-  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css" />
 </head>
 
 <body>
@@ -23,17 +23,21 @@
         <form action="" class="form">
           <div class="addTask__form">
             <div class="form-div">
-              <input type="text" class="inputText" id="inputText" name="inputText" placeholder="To Do" required>
-              <div class="ok"><i class=""></i></div>
-              <button type="submit" class="btn"><i class="fas fa-plus"></i></button>
+              <input type="text" class="inputText" id="inputText" name="inputText" placeholder="Something to do" required>
+              <div class="ok">
+                <i></i>
+              </div>
             </div>
+            <button type="submit" class="btn">
+              <i class="fas fa-plus"></i>
+            </button>
             <div class="date">
-              <p>Date:
-                <input type='text' data-timepicker="true" class='datepicker-here' id="inputData" name="inputData" data-language='en' required>
+              <p>Date: </p>
+              <input type='text' data-timepicker="true" class='datepicker-here' id="inputData" placeholder="Select data" name="inputData"
+                data-language='en' required>
             </div>
           </div>
         </form>
-
         <h1>To Do:</h1>
         <ul class="list">
           <p class="list-init-text">List is empty</p>
@@ -45,9 +49,10 @@
       </div>
     </main>
   </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
   <script src="./DatePicker/datepicker.min.js"></script>
   <script src="./DatePicker/datepicker.en.js"></script>
-  <script src="app.js"></script>
+  <script src="./js/out.js"></script>
 </body>
 
 </html>
