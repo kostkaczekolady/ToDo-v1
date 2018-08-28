@@ -4,7 +4,7 @@ ToDo-v1 is an app supporting tasks management. To remeber about important things
  
 ![ToDo](image/ToDo.png)
 
-##Credentials
+## Credentials
 
 ToDo-v1 web project was designed and implemented during Fronted course in CodersLab by:
 1. Dominika Dziubińska [github] (https://github.com/kostkaczekolady)
