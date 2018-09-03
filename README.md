@@ -21,5 +21,5 @@ ToDo-v1 web project was designed and implemented during Fronted course in Coders
 2. Install the application: `npm install`
 3. Enjoy!
 
-[demo] (https://kostkaczekolady.github.io/ToDo-v1/)
+## [ToDo demo](https://kostkaczekolady.github.io/ToDo-v1/)
 
